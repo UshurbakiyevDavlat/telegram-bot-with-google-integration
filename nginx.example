@@ -1,0 +1,44 @@
+server {
+        root /var/www/atyrau-korneki-bot/core;
+
+        # Add index.php to the list if you are using PHP
+        index index.php;
+
+        server_name atyrau-korneki.site www.atyrau-korneki.site;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+    }
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/atyrau-korneki.site/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/atyrau-korneki.site/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+    if ($host = www.atyrau-korneki.site) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = atyrau-korneki.site) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        server_name atyrau-korneki.site www.atyrau-korneki.site;
+    return 404; # managed by Certbot
+}

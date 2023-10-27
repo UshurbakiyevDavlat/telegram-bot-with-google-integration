@@ -1,0 +1,25 @@
+{
+    "author": [
+        {
+            "name": "Davlatbek Ushurbakiyev",
+            "email": "dushurbakiev@gmail.com"
+        }
+    ],
+    "type": "project",
+    "description": "Telegram bot with Google API, especially Google Drive and Google sheets API",
+    "name": "dushurbakiev/telegram-bot",
+    "require": {
+        "php": "^8.1",
+        "vlucas/phpdotenv": "^5.5",
+        "google/apiclient": "^2.8",
+        "irazasyed/telegram-bot-sdk": "^3.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "core/"
+        }
+    }
+}
